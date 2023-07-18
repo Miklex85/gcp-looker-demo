@@ -1,20 +1,34 @@
 connection: "sae"
 
-include: "/views/*.view.lkml"                # include all views in the views/ folder in this project
-# include: "/**/*.view.lkml"                 # include all views in this project
-# include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
+# include all the views
+include: "/views/**/*.view.lkml"
 
-# # Select the views that should be a part of this model,
-# # and define the joins that connect them together.
-#
-# explore: order_items {
-#   join: orders {
-#     relationship: many_to_one
-#     sql_on: ${orders.id} = ${order_items.order_id} ;;
-#   }
-#
-#   join: users {
-#     relationship: many_to_one
-#     sql_on: ${users.id} = ${orders.user_id} ;;
-#   }
-# }
+datagroup: sae_demo_default_datagroup {
+  # sql_trigger: SELECT MAX(id) FROM etl_log;;
+  max_cache_age: "1 hour"
+}
+
+persist_with: sae_demo_default_datagroup
+
+explore: alumnos_drive {
+  join: materias_drive {
+    sql_on: ${alumnos_drive.id} = ${materias_drive.people_id} ;;
+    relationship: one_to_many
+  }
+  join: historico_drive {
+    sql_on: ${alumnos_drive.id} = ${historico_drive.people_id} ;;
+    relationship: one_to_many
+  }
+  join: cargos_drive {
+    sql_on: ${alumnos_drive.id} = ${cargos_drive.people_id} ;;
+    relationship: one_to_many
+  }
+  join: pagos_drive {
+    sql_on: ${alumnos_drive.id} = ${pagos_drive.people_id} ;;
+    relationship: one_to_many
+  }
+  join: becas_drive {
+    sql_on: ${alumnos_drive.id} = ${becas_drive.people_id} ;;
+    relationship: one_to_many
+  }
+}
