@@ -1,8 +1,10 @@
 view: historico_drive {
   sql_table_name: `demoai-386200.sae_demo.historico_drive` ;;
+  drill_fields: [alumno_drive.id, alumno_drive.matricula, alumno_drive.nombre, alumno_drive.correo_institucional, periodo, sesion, carrera, estatus]
 
   dimension: anio {
     type: number
+    value_format_name: id
     sql: ${TABLE}.ANIO ;;
   }
   dimension: carrera {
@@ -27,5 +29,6 @@ view: historico_drive {
   }
   measure: count {
     type: count
+    drill_fields: [alumno_drive.id, alumno_drive.matricula, alumno_drive.nombre, alumno_drive.correo_institucional, periodo, sesion, carrera, estatus]
   }
 }

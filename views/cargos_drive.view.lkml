@@ -1,5 +1,6 @@
 view: cargos_drive {
   sql_table_name: `demoai-386200.sae_demo.cargos_drive` ;;
+  drill_fields: [people_id, alumnos_drive.matricula, alumnos_drive.nombre, periodo, sesion, fecha_captura_date, cantidad, cantidad_pagada, saldo]
 
   dimension: anio {
     type: number
@@ -53,5 +54,24 @@ view: cargos_drive {
   }
   measure: count {
     type: count
+    drill_fields: [people_id, alumnos_drive.matricula, alumnos_drive.nombre, periodo, sesion, fecha_captura_date, cantidad, cantidad_pagada, saldo]
+  }
+  measure: sum_amount {
+    type: sum
+    sql: ${cantidad} ;;
+    value_format_name: usd
+    drill_fields: [people_id, alumnos_drive.matricula, alumnos_drive.nombre, periodo, sesion, fecha_captura_date, cantidad, cantidad_pagada, saldo]
+  }
+  measure: sum_paid_amount {
+    type: sum
+    sql: ${cantidad_pagada} ;;
+    value_format_name: usd
+    drill_fields: [people_id, alumnos_drive.matricula, alumnos_drive.nombre, periodo, sesion, fecha_captura_date, cantidad, cantidad_pagada, saldo]
+  }
+  measure: sum_balance_amount {
+    type: sum
+    sql: ${saldo} ;;
+    value_format_name: usd
+    drill_fields: [people_id, alumnos_drive.matricula, alumnos_drive.nombre, periodo, sesion, fecha_captura_date, cantidad, cantidad_pagada, saldo]
   }
 }

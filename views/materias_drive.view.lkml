@@ -1,11 +1,12 @@
 view: materias_drive {
   sql_table_name: `demoai-386200.sae_demo.materias_drive` ;;
+  drill_fields: [alumno_drive.id, alumno_drive.matricula, alumno_drive.nombre, alumno_drive.correo_institucional, periodo, sesion, nombre_materia, calificacion]
 
   dimension: anio {
     type: number
     sql: ${TABLE}.ANIO ;;
   }
-  dimension: calif {
+  dimension: calificacion {
     type: number
     sql: ${TABLE}.CALIF ;;
   }
@@ -35,5 +36,6 @@ view: materias_drive {
   }
   measure: count {
     type: count
+    drill_fields: [alumno_drive.id, alumno_drive.matricula, alumno_drive.nombre, alumno_drive.correo_institucional, periodo, sesion, nombre_materia, calificacion]
   }
 }
