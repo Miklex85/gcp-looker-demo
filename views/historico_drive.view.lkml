@@ -27,6 +27,16 @@ view: historico_drive {
     type: string
     sql: ${TABLE}.SESION ;;
   }
+  dimension:  carrera_in {
+    type: string
+    sql: ${TABLE}.CARRERA IN () ;;
+  }
+
+  measure: count_alumnos {
+    type: count_distinct
+    sql: ${people_id} ;;
+    filters: [carrera: "AED,DAD,GDD,DFD,GPD,MBDD,MPPD,AFXD,CCNM"]
+  }
   measure: count {
     type: count
     drill_fields: [alumno_drive.id, alumno_drive.matricula, alumno_drive.nombre, alumno_drive.correo_institucional, periodo, sesion, carrera, estatus]
